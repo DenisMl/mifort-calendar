@@ -1,31 +1,30 @@
-let express = require('express');
-let http = require('http');
-let path = require('path');
-let config = require('./config');
-let bodyParser = require('body-parser');
-let cookieParser = require('cookie-parser');
-let morgan = require('morgan');
-let mongoose = require('./libs/mongoose');
-let mainRoutes = require('./routes/mainRoutes');
-let appRoutes = require('./routes/appRoutes');
+const express = require('express');
+const http = require('http');
+const config = require('./config');
+const bodyParser = require('body-parser');
+// const cookieParser = require('cookie-parser');
+// const morgan = require('morgan');
+// const mongoose = require('./libs/mongoose');
+const mainRoutes = require('./routes/mainRoutes');
+const appRoutes = require('./routes/appRoutes');
 
-let session = require('express-session');
-let MongoStore = require('connect-mongo')(session);
-let mongoose_store = new MongoStore({mongooseConnection: mongoose.connection});
+// const session = require('express-session');
+// const MongoStore = require('connect-mongo')(session);
+// const mongoose_store = new MongoStore({mongooseConnection: mongoose.connection});
 
-let app = express();
+const app = express();
 
-app.use(morgan('dev'));
-app.use(cookieParser());
+// app.use(morgan('dev'));
+// app.use(cookieParser());
 
-app.use(session({
-    secret: config.get('session:secret'),
-    key: config.get('session:key'),
-    cookie: config.get('session:cookie'),
-    saveUninitialized: false,
-    resave: false,
-    store: mongoose_store
-}));
+// app.use(session({
+//     secret: config.get('session:secret'),
+//     key: config.get('session:key'),
+//     cookie: config.get('session:cookie'),
+//     saveUninitialized: false,
+//     resave: false,
+//     store: mongoose_store
+// }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
