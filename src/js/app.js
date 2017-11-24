@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 
 import Header from '../components/header';
-import Calendar from '../components/calendar';
+import Calendar from '../../src/components/calendar';
 
 class App extends Component {
 

@@ -44,7 +44,10 @@ appController.getCurrentMonth = function (req, res) {
 	async.waterfall([
 		function (callback) {
 			Months.findOne({
-				date: req.body.date
+				$and: [
+					{'date.month': req.body.date.currentMonth},
+					{'date.year': req.body.date.currentYear}
+				]
 			}, callback);
 		},
 		function (month, callback) {
