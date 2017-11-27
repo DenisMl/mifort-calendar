@@ -16,7 +16,8 @@ const schema = new Schema({
 	},
 	days: [
 		{
-			dayOfMonth: String,
+			dayOfMonth: Number,
+			dayOfWeek: Number,
 			events: [{
 				eventName: String,
 				eventNarrator: String,

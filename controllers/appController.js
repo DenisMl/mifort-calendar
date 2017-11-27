@@ -39,6 +39,12 @@ function daysInMonth(month, year) {
 	return new Date(year, month, 0).getDate();
 }
 
+function getDayOfWeek (year, month, day) {
+	let dayOfWeek = new Date(year, month, day);
+	dayOfWeek = dayOfWeek.getDay();
+	return dayOfWeek === 0 ? 7: dayOfWeek;
+}
+
 appController.getCurrentMonth = function (req, res) {
 
 	async.waterfall([
@@ -63,6 +69,7 @@ appController.getCurrentMonth = function (req, res) {
 				for (let i = 0; i < daysAmount; i++) {
 					days[i] = {
 						dayOfMonth: i + 1,
+						dayOfWeek: getDayOfWeek(req.body.date.currentYear, req.body.date.currentMonth - 1, i + 1),
 						events: []
 					}
 				}
