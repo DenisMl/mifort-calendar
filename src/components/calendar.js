@@ -7,7 +7,9 @@ export default class Calendar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {currentMonth: null};
+
 		this.renderWeeks = this.renderWeeks.bind(this);
+		this.getCurrentMonth = this.getCurrentMonth.bind(this);
 	}
 
 	getCurrentMonth() {
@@ -43,17 +45,22 @@ export default class Calendar extends Component {
 	renderWeeks() {
 		if (this.state.currentMonth !== null) {
 			let weeks = [];
-			let week = [];
-			this.state.currentMonth.days.map(function(day, i) {
+			let week = new Array(7).fill(null);
+			this.state.currentMonth.days.map(function (day, i, days) {
 				if (day.dayOfWeek !== 7) {
-					week[day.dayOfWeek] = day;
-				} else {
-					week[day.dayOfWeek] = day;
+					week[day.dayOfWeek - 1] = day;
+          if (i === days.length - 1) { //on last day of month
+            weeks.push(week);
+            week = [];
+          }
+				} else { //on sunday
+					week[day.dayOfWeek - 1] = day;
 					weeks.push(week);
 					week = [];
 				}
 			});
-			console.log(weeks) //TODO weeks.length == 8
+
+			console.log(weeks);
 			return weeks.map(function (week, i) {
 				return <Week week={week} key={i}/>
 			});
