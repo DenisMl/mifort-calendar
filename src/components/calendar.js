@@ -49,14 +49,14 @@ export default class Calendar extends Component {
 			this.state.currentMonth.days.map(function (day, i, days) {
 				if (day.dayOfWeek !== 7) {
 					week[day.dayOfWeek - 1] = day;
-          if (i === days.length - 1) { //on last day of month
-            weeks.push(week);
-            week = [];
-          }
+					if (i === days.length - 1) { //on last day of month
+						weeks.push(week);
+						week = new Array(7).fill(null);
+					}
 				} else { //on sunday
 					week[day.dayOfWeek - 1] = day;
 					weeks.push(week);
-					week = [];
+					week = new Array(7).fill(null);
 				}
 			});
 
