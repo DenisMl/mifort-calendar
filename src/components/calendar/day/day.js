@@ -4,6 +4,7 @@ import DayOfMonthComponent from "./dayOfMonth/dayOfMonth";
 import EventTypeComponent from "./eventType/eventType";
 import NarratorComponent from "./narrator/narrator";
 import NameComponent from "./name/name";
+import AddButtonComponent from "./addButton/addButton";
 
 import {Day} from './style';
 
@@ -19,6 +20,7 @@ export default class DayComponent extends Component {
 					<EventTypeComponent type={this.props.day.event[0].eventType}/>
 					<NarratorComponent narrator={this.props.day.event[0].narrator}/>
 					<NameComponent name={this.props.day.event[0].name}/>
+					<AddButtonComponent />
 				</div>
       )
     } else {
