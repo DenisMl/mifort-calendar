@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import TimeComponent from "./time/time";
+import DayOfMonthComponent from "./dayOfMonth/dayOfMonth";
 
 import {Day} from './style';
 
@@ -8,7 +10,10 @@ export default class DayComponent extends Component {
     let day;
     if (this.props.day) {
       day = (
-        <div>{this.props.day.dayOfMonth}</div>
+      	<div>
+					<DayOfMonthComponent day={this.props.day.dayOfMonth}/>
+					<TimeComponent time={this.props.day.event[0].time}/>
+				</div>
       )
     } else {
       day = (
@@ -16,7 +21,7 @@ export default class DayComponent extends Component {
       )
     }
 		return (
-			<Day>
+			<Day className="day">
 				{day}
 			</Day>
 		);
