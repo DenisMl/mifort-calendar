@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
 
-import Header from "../components/header";
-import Calendar from "../components/calendar";
+import Header from "../components/header/header";
+import Main from "../components/main/main";
+import {Wrapper} from "../components/wrapper/style";
 
 class App extends Component {
 
@@ -24,14 +25,10 @@ class App extends Component {
 
 	render() {
 		return (
-			<div>
+			<Wrapper>
 				<Header/>
-				<main>
-					<div className="calendar-wrapper">
-						<Calendar/>
-					</div>
-				</main>
-			</div>
+				<Main/>
+			</Wrapper>
 		);
 	};
 

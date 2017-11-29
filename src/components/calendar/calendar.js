@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
-import Week from "./week";
+import WeekComponent from "./week/week";
 
-export default class Calendar extends Component {
+import {CalendarWrapper, Calendar} from './style';
+
+
+export default class CalendarComponent extends Component {
 
 
 	constructor(props) {
@@ -62,7 +65,7 @@ export default class Calendar extends Component {
 
 			console.log(weeks);
 			return weeks.map(function (week, i) {
-				return <Week week={week} key={i}/>
+				return <WeekComponent week={week} key={i}/>
 			});
 		}
 	}
@@ -73,9 +76,11 @@ export default class Calendar extends Component {
 
 	render() {
 		return (
-			<div className="calendar">
-				{this.renderWeeks()}
-			</div>
+				<CalendarWrapper>
+					<Calendar>
+						{this.renderWeeks()}
+					</Calendar>
+				</CalendarWrapper>
 		);
 	}
 }

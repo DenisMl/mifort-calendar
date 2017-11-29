@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
-import Day from "./day";
+import DayComponent from "../day/day";
 
-export default class Week extends Component {
+import {Week} from './style';
+
+
+export default class WeekComponent extends Component {
 
 	constructor(props) {
 		super(props);
@@ -10,14 +13,14 @@ export default class Week extends Component {
 	}
 
 	renderDays(day, i) {
-		return (<Day day={day} key={i}/>)
+		return (<DayComponent day={day} key={i}/>)
 	}
 
 	render() {
 		return (
-			<div className="week">
+			<Week>
 				{this.props.week.map(this.renderDays)}
-			</div>
+			</Week>
 		);
 	}
 }

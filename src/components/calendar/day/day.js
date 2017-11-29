@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 
-export default class Day extends Component {
+import {Day} from './style';
+
+
+export default class DayComponent extends Component {
 	render() {
     let day;
     if (this.props.day) {
@@ -13,9 +16,9 @@ export default class Day extends Component {
       )
     }
 		return (
-			<div className="day">
+			<Day>
 				{day}
-			</div>
+			</Day>
 		);
 	}
 }
