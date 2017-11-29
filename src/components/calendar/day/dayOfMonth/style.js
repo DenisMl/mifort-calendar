@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 export const DayOfMonth = styled.div`
 	display: inline-block;
-	border: 1px solid;
 	box-sizing: border-box;
+	width: 30%;
+	height: 50px;
+	text-align: center;
+	font-size: 30px;
 `;

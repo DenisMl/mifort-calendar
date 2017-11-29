@@ -5,6 +5,7 @@ export const Day = styled.div`
 	height: 100%;
 	width: 14.2%;
 	border: 1px solid;
+	border-color: #e0e0e0;
 	box-sizing: border-box;
-	text-align: left;
+	vertical-align: top;
 `;

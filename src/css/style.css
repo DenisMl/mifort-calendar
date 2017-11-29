@@ -102,11 +102,11 @@
     /*cursor: pointer;*/
 /*}*/
 
-.day {
-    /* display: inline-block; */
-    height: 100%;
-    width: 14.2%;
-    border: 1px solid;
-    box-sizing: border-box;
-    text-align: right;
-}
+/*.day {*/
+    /*!* display: inline-block; *!*/
+    /*height: 100%;*/
+    /*width: 14.2%;*/
+    /*border: 1px solid;*/
+    /*box-sizing: border-box;*/
+    /*text-align: right;*/
+/*}*/
