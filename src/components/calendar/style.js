@@ -7,6 +7,5 @@ export const CalendarWrapper = styled.div`
 `;
 
 export const Calendar = styled.div`
-	border: 1px solid black;
-	min-width: 740px;
+	min-width: 960px;
 `;
