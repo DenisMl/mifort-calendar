@@ -1,24 +1,21 @@
 import React, {Component} from 'react';
 
-import {Day} from './style';
+import { Day, DayWrap } from './style';
 
 
 export default class DayComponent extends Component {
+
 	render() {
-    let day;
+    let day = <Day />;
     if (this.props.day) {
       day = (
-        <div>{this.props.day.dayOfMonth}</div>
-      )
-    } else {
-      day = (
-        <div>another</div>
+        <Day>{this.props.day.dayOfMonth}</Day>
       )
     }
 		return (
-			<Day>
+			<DayWrap>
 				{day}
-			</Day>
+			</DayWrap>
 		);
 	}
 }
