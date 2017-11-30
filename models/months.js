@@ -18,10 +18,10 @@ const schema = new Schema({
 		{
 			dayOfMonth: Number,
 			dayOfWeek: Number,
-			events: [{
-				eventName: String,
-				eventNarrator: String,
-				eventDate: Date,
+			event: [{
+				name: String,
+				narrator: String,
+				time: String,
 				eventType: String
 			}]
 		}

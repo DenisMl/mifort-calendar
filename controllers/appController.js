@@ -70,13 +70,16 @@ appController.getCurrentMonth = function (req, res) {
 					days[i] = {
 						dayOfMonth: i + 1,
 						dayOfWeek: getDayOfWeek(req.body.date.currentYear, req.body.date.currentMonth - 1, i + 1),
-						events: []
+						event: {
+							name: 'name',
+							narrator: 'narrator',
+							time: 'time',
+							eventType: 'type'
+						}
 					}
 				}
 
 				let month = new Months({date: date, days: days});
-				// console.log(`>>month: ${month}`);
-
 				month.save(function (err) {
 					if (err) {
 						callback(err);
