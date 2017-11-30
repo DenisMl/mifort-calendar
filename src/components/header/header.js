@@ -7,7 +7,7 @@ class Header extends Component {
 		return (
 			<HeaderElement>
 				<div className="logo">
-					<img src="/public/img/logo.png" alt="logo"/>
+					<img src="/img/logo.png" alt="logo"/>
 					<span>Mifort</span>
 				</div>
 			</HeaderElement>
