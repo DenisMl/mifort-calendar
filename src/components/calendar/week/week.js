@@ -13,7 +13,7 @@ export default class WeekComponent extends Component {
 	}
 
 	renderDays(day, i) {
-		return (<DayComponent day={day} key={i}/>)
+		return (<DayComponent day={day} key={i} modalOpen={this.props.modalOpen} setChosenDay={this.props.setChosenDay}/>)
 	}
 
 	render() {

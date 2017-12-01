@@ -3,46 +3,14 @@ const Months = require('../models/months');
 
 let appController = {};
 
-// appController.getUserInfo = function (req, res) {
-// 	let userInfo = {};
-//
-// 	async.waterfall([
-// 		function (callback) {
-// 			User.findOne({
-// 				_id: req.session.user
-// 			}, callback);
-// 		},
-// 		function (user, callback) { //1st arg: user or null
-// 			if (user) {
-// 				userInfo = {
-// 					'email': user.email,
-// 					'firstName': user.firstName,
-// 					'lastName': user.lastName,
-// 					'isManager': user.isManager
-// 				}
-// 				callback(null, userInfo);
-// 			} else {
-// 				callback('user not found');
-// 			}
-// 		}
-// 	], function (err, userInfo) {
-// 		if (err) {
-// 			console.error('>> ' + err);
-// 			res.redirect('/login');
-// 		} else {
-// 			res.json(userInfo);
-// 		}
-// 	});
-// };
-
 function daysInMonth(month, year) {
 	return new Date(year, month, 0).getDate();
 }
 
-function getDayOfWeek (year, month, day) {
+function getDayOfWeek(year, month, day) {
 	let dayOfWeek = new Date(year, month, day);
 	dayOfWeek = dayOfWeek.getDay();
-	return dayOfWeek === 0 ? 7: dayOfWeek;
+	return dayOfWeek === 0 ? 7 : dayOfWeek;
 }
 
 appController.getCurrentMonth = function (req, res) {
@@ -98,6 +66,32 @@ appController.getCurrentMonth = function (req, res) {
 		}
 	});
 
+};
+
+appController.addEvent = function (req, res) {
+
+	Months.findOneAndUpdate({
+			$and: [
+				{'date.year': req.body.date.year},
+				{'date.month': req.body.date.month}
+			],
+			'days.dayOfMonth': req.body.date.day
+		}, {
+			$set: {
+				'days.$.event.0': req.body.event
+			}
+		}, {
+			upsert: true,
+			new: true
+		},
+		function (err, upd) {
+			if (err) {
+				console.error('>> ' + err);
+				res.end();
+			} else {
+				res.send(upd);
+			}
+		});
 };
 
 module.exports = appController;

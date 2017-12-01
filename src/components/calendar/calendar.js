@@ -3,9 +3,7 @@ import WeekComponent from "./week/week";
 
 import {CalendarWrapper, Calendar} from './style';
 
-
 export default class CalendarComponent extends Component {
-
 
 	constructor(props) {
 		super(props);
@@ -13,6 +11,80 @@ export default class CalendarComponent extends Component {
 
 		this.renderWeeks = this.renderWeeks.bind(this);
 		this.getCurrentMonth = this.getCurrentMonth.bind(this);
+		this.modalOpen = this.modalOpen.bind(this);
+		this.modalClose = this.modalClose.bind(this);
+		this.modalCloseOutside = this.modalCloseOutside.bind(this);
+		this.createAndClose = this.createAndClose.bind(this);
+		this.setChosenDay = this.setChosenDay.bind(this);
+	}
+
+	modalOpen(event) {
+		// event.stopPropagation();
+		this.refs.modal.style.display = "block";
+		this.refs.time.value = '';
+		this.refs.type.value = '';
+		this.refs.narrator.value = '';
+		this.refs.name.value = '';
+		this.refs.time.focus();
+	};
+
+	modalClose() {
+		this.refs.modal.style.display = "none";
+	};
+
+	modalCloseOutside(event) {
+		// event.stopPropagation();
+		if (event.target === this.refs.modal) {
+			this.refs.modal.style.display = "none";
+		}
+	};
+
+	createAndClose(event) {
+		this.addEvent();
+		this.modalClose();
+	};
+
+	setChosenDay(day) {
+		this.setState({chosenDay: day})
+	};
+
+	addEvent() {
+		const self = this;
+		console.log(this.state.chosenDay)
+
+		let body = {
+			date: {
+				day: this.state.chosenDay,
+				month: this.state.currentMonth.date.month,
+				year: this.state.currentMonth.date.year,
+
+			},
+			event: {
+				name: this.refs.name.value,
+				narrator: this.refs.narrator.value,
+				time: this.refs.time.value,
+				eventType: this.refs.type.value
+			}
+		};
+		body = JSON.stringify(body);
+
+		fetch('/app/addEvent', {
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			method: 'POST',
+			body: body,
+		}).then(function (res) {
+			return res.json();
+		}).then(function (res) {
+			console.log('addEvent:')
+			console.dir(res);
+			self.setState({currentMonth: res});
+			return res;
+		}).catch(function (err) {
+			console.error(`>>err: ${err}`);
+		});
 	}
 
 	getCurrentMonth() {
@@ -37,7 +109,7 @@ export default class CalendarComponent extends Component {
 		}).then(function (res) {
 			return res.json();
 		}).then(function (res) {
-			console.dir(res);
+			// console.dir(res);
 			self.setState({currentMonth: res});
 			return res;
 		}).catch(function (err) {
@@ -46,6 +118,7 @@ export default class CalendarComponent extends Component {
 	};
 
 	renderWeeks() {
+		const self = this;
 		if (this.state.currentMonth !== null) {
 			let weeks = [];
 			let week = new Array(7).fill(null);
@@ -63,9 +136,9 @@ export default class CalendarComponent extends Component {
 				}
 			});
 
-			console.log(weeks);
+			// console.log(weeks);
 			return weeks.map(function (week, i) {
-				return <WeekComponent week={week} key={i}/>
+				return <WeekComponent week={week} key={i} modalOpen={self.modalOpen} setChosenDay={self.setChosenDay}/>
 			});
 		}
 	}
@@ -80,6 +153,24 @@ export default class CalendarComponent extends Component {
 					<Calendar>
 						{this.renderWeeks()}
 					</Calendar>
+
+					{/* <!-- The Modal --> */}
+					<div ref="modal" onClick={this.modalCloseOutside} className="modal">
+						{/* <!-- Modal content --> */}
+						<div className="modal-content form">
+							<div className="modal-header">
+								<h4>Add new event</h4>
+							</div>
+							<div className="modal-body">
+								<input className="modal-input" ref="time" type="text" placeholder="event time" autoFocus/>
+								<input className="modal-input" ref="type" type="text" placeholder="event type" />
+								<input className="modal-input" ref="narrator" type="text" placeholder="event narrator" />
+								<input className="modal-input" ref="name" type="text" placeholder="event name" />
+								<button className="button modal-button" onClick={this.createAndClose}>Add</button>
+							</div>
+						</div>
+					</div>
+
 				</CalendarWrapper>
 		);
 	}

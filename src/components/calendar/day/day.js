@@ -20,7 +20,7 @@ export default class DayComponent extends Component {
 					<EventTypeComponent type={this.props.day.event[0].eventType}/>
 					<NarratorComponent narrator={this.props.day.event[0].narrator}/>
 					<NameComponent name={this.props.day.event[0].name}/>
-					<AddButtonComponent />
+					<AddButtonComponent dayOfMonth={this.props.day.dayOfMonth} modalOpen={this.props.modalOpen} setChosenDay={this.props.setChosenDay} />
 				</div>
       )
     } else {
