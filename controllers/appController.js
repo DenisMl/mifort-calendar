@@ -39,10 +39,10 @@ appController.getCurrentMonth = function (req, res) {
 						dayOfMonth: i + 1,
 						dayOfWeek: getDayOfWeek(req.body.date.currentYear, req.body.date.currentMonth - 1, i + 1),
 						event: {
-							name: 'name',
-							narrator: 'narrator',
-							time: 'time',
-							eventType: 'type'
+							name: '',
+							narrator: '',
+							time: '',
+							eventType: ''
 						}
 					}
 				}

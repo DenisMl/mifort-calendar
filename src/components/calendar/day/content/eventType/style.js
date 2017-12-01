@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
-export const Name = styled.div`
+export const EventType = styled.div`
 	box-sizing: border-box;
+	margin-bottom: 0.7Vmin;
 `;

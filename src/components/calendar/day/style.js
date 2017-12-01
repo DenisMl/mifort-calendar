@@ -8,4 +8,7 @@ export const Day = styled.div`
 	border-color: #e0e0e0;
 	box-sizing: border-box;
 	vertical-align: top;
+	text-align: left;
+	position: relative;
+	font-size: 1.6vmin;
 `;
