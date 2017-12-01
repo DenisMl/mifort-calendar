@@ -7,4 +7,5 @@ export const DayOfMonth = styled.div`
 	text-align: center;
 	font-size: 3.4vmin;
 	vertical-align: top;
+	width: 100%;
 `;

@@ -8,4 +8,6 @@ export const Time = styled.div`
 	padding-top: 2vmin;
 	font-size: 10px;
 	font-weight: 600;
+	width: 100%;
+
 `;

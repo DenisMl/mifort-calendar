@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import WeekComponent from "./week/week";
 
 import {CalendarWrapper, Calendar} from './style';
+import WeekdayNamesComponent from "./weekdayNames/weekdayNames";
 
 export default class CalendarComponent extends Component {
 
@@ -151,6 +152,7 @@ export default class CalendarComponent extends Component {
 		return (
 				<CalendarWrapper>
 					<Calendar>
+						<WeekdayNamesComponent/>
 						{this.renderWeeks()}
 					</Calendar>
 

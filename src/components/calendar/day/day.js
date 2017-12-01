@@ -20,13 +20,18 @@ export default class DayComponent extends Component {
 	}
 
 	renderDay() {
+		let weekend = '';
+			if (this.props.dayOfWeek === 6 || this.props.dayOfWeek === 7) {
+			weekend = 'weekend'
+		}
+
 		if (this.props.day.event[0].time ||
 			this.props.day.event[0].eventType ||
 			this.props.day.event[0].narrator ||
 			this.props.day.event[0].name) {
 
 			return (
-				<Day>
+				<Day className={weekend}>
 					<TimeBlockComponent day={this.props.day.dayOfMonth} time={this.props.day.event[0].time}/>
 					<ContentComponent type={this.props.day.event[0].eventType} narrator={this.props.day.event[0].narrator}
 														name={this.props.day.event[0].name}/>
