@@ -3,6 +3,7 @@ import WeekComponent from "./week/week";
 
 import {CalendarWrapper, Calendar} from './style';
 import WeekdayNamesComponent from "./weekdayNames/weekdayNames";
+import Navigation from "./navigation/navigation";
 
 export default class CalendarComponent extends Component {
 
@@ -17,7 +18,17 @@ export default class CalendarComponent extends Component {
 		this.modalCloseOutside = this.modalCloseOutside.bind(this);
 		this.createAndClose = this.createAndClose.bind(this);
 		this.setChosenDay = this.setChosenDay.bind(this);
+		this.getNavigation = this.getNavigation.bind(this);
 	}
+
+    getNavigation() {
+		return (
+			<Navigation
+				currentMonth={this.state.currentMonth}
+			/>
+		)
+
+    }
 
 	modalOpen(event) {
 		// event.stopPropagation();
@@ -149,8 +160,12 @@ export default class CalendarComponent extends Component {
 	};
 
 	render() {
+
+		let navigation = this.getNavigation();
+
 		return (
 				<CalendarWrapper>
+					{/*{navigation}*/}
 					<Calendar>
 						<WeekdayNamesComponent/>
 						{this.renderWeeks()}
