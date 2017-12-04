@@ -7,4 +7,5 @@ export const TimeBlock = styled.div`
 	height: 100%;
 	text-align: center;
 	vertical-align: top;
+	overflow: hidden;
 `;

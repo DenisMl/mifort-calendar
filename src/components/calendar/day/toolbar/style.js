@@ -10,7 +10,7 @@ export const Toolbar = styled.div`
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	padding-left: 5px;
+	padding: 0 0 2px 5px;
 	&:hover {
 		color: #9e9e9e;
 	}
