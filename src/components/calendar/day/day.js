@@ -31,7 +31,7 @@ export default class DayComponent extends Component {
 				{content}
 				<ToolbarComponent
 					dayOfMonth={this.props.day.dayOfMonth}
-					modalIsDisplayed={this.props.modalIsDisplayed}
+					modalOpen={this.props.modalOpen}
 					setChosenDay={this.props.setChosenDay}
 				/>
 			</div>
