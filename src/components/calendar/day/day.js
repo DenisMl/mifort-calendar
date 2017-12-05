@@ -9,10 +9,10 @@ import TimeBlockComponent from "./timeBlock/timeBlock";
 
 export default class DayComponent extends Component {
 
-	constructor(props) {
-		super(props);
-		this.renderDay = this.renderDay.bind(this);
-	}
+    constructor(props) {
+        super(props);
+        this.renderDay = this.renderDay.bind(this);
+    }
 
 	renderDay() {
 		if (this.props.day.event[0].time ||
@@ -84,4 +84,3 @@ export default class DayComponent extends Component {
 		return day;
 	}
 }
-
