@@ -31,7 +31,6 @@ export default class CalendarComponent extends Component {
     }
 
 	modalOpen(event) {
-		// event.stopPropagation();
 		this.refs.modal.style.display = "block";
 		this.refs.time.value = '';
 		this.refs.type.value = '';

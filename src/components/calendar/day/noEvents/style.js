@@ -7,7 +7,7 @@ export const NoEvents = styled.div`
 	font-size: 0.9em;
 	color: #9f9f9f;
 	width: 70%;
-	padding: 5Vmin 0 0 0.5vmin;
+	padding: 5Vmin 0.8vmin 0 0.5vmin;
     
 	${Day}:hover & {
 		display: inline-block;

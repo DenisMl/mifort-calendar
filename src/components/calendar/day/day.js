@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import NoEventsComponent from "./noEvents/noEvents";
 import ToolbarComponent from "./toolbar/toolbar";
 
-import {Day} from './style';
+import {Day, DayWeekend} from './style';
 import ContentComponent from "./content/content";
 import TimeBlockComponent from "./timeBlock/timeBlock";
 
@@ -14,54 +14,73 @@ export default class DayComponent extends Component {
         this.renderDay = this.renderDay.bind(this);
     }
 
-    renderDay() {
+	renderDay() {
+		if (this.props.day.event[0].time ||
+			this.props.day.event[0].eventType ||
+			this.props.day.event[0].narrator ||
+			this.props.day.event[0].name) {
 
-        let time = this.props.day.event[0].time;
-        let eventType = this.props.day.event[0].eventType;
-        let narrator = this.props.day.event[0].narrator;
-        let name = this.props.day.event[0].name;
-		let content = <NoEventsComponent/>;
+			return (
+				<Day>
+					<TimeBlockComponent day={this.props.day.dayOfMonth} time={this.props.day.event[0].time}/>
+					<ContentComponent type={this.props.day.event[0].eventType} narrator={this.props.day.event[0].narrator}
+														name={this.props.day.event[0].name}/>
+					<ToolbarComponent dayOfMonth={this.props.day.dayOfMonth} modalOpen={this.props.modalOpen}
+														setChosenDay={this.props.setChosenDay}/>
+				</Day>
+			)
+		} else {
+			return (
+				<Day>
+					<TimeBlockComponent day={this.props.day.dayOfMonth} time={this.props.day.event[0].time}/>
+					<NoEventsComponent/>
+					<ToolbarComponent dayOfMonth={this.props.day.dayOfMonth} modalOpen={this.props.modalOpen}
+														setChosenDay={this.props.setChosenDay}/>
+				</Day>
+			)
+		}
+	}
 
-        if (time || eventType || narrator || name) {
-            content =
-				<ContentComponent type={this.props.day.event[0].eventType} narrator={this.props.day.event[0].narrator}
-								  name={this.props.day.event[0].name}/>;
-        }
-        return (
-			<div>
-				<TimeBlockComponent
-					day={this.props.day.dayOfMonth}
-					time={this.props.day.event[0].time}
-				/>
+	renderWeekendDay() {
+		if (this.props.day.event[0].time ||
+			this.props.day.event[0].eventType ||
+			this.props.day.event[0].narrator ||
+			this.props.day.event[0].name) {
 
-					{content}
+			return (
+				<DayWeekend>
+					<TimeBlockComponent day={this.props.day.dayOfMonth} time={this.props.day.event[0].time}/>
+					<ContentComponent type={this.props.day.event[0].eventType} narrator={this.props.day.event[0].narrator}
+														name={this.props.day.event[0].name}/>
+					<ToolbarComponent dayOfMonth={this.props.day.dayOfMonth} modalOpen={this.props.modalOpen}
+														setChosenDay={this.props.setChosenDay}/>
+				</DayWeekend>
+			)
+		} else {
+			return (
+				<DayWeekend>
+					<TimeBlockComponent day={this.props.day.dayOfMonth} time={this.props.day.event[0].time}/>
+					<NoEventsComponent/>
+					<ToolbarComponent dayOfMonth={this.props.day.dayOfMonth} modalOpen={this.props.modalOpen}
+														setChosenDay={this.props.setChosenDay}/>
+				</DayWeekend>
+			)
+		}
+	}
 
-				<ToolbarComponent
-					dayOfMonth={this.props.day.dayOfMonth}
-					modalOpen={this.props.modalOpen}
-					setChosenDay={this.props.setChosenDay}
-				/>
-			</div>
-        )
-    }
-
-    render() {
-        let day = null;
-        let weekend = '';
-
-        if (this.props.day) {
-            day = this.renderDay();
-        }
-
-        if (this.props.dayOfWeek >= 6) {
-            weekend = 'weekend'
-        }
-
-        return (
-        	<Day className={weekend || ''}>
-                {day}
-			</Day>
-		)
-
-    }
+	render() {
+		let day;
+		if (this.props.day) {
+			if (this.props.day.dayOfWeek === 6 || this.props.day.dayOfWeek === 7) {
+				day = this.renderWeekendDay();
+			} else {
+				day = this.renderDay();
+			}
+		} else {
+			day = (
+				<Day/>
+			)
+		}
+		return day;
+	}
 }

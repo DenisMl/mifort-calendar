@@ -8,7 +8,6 @@ export default class WeekComponent extends Component {
 
 	constructor(props) {
 		super(props);
-		// this.state = {currentMonth: null};
 		this.renderDays = this.renderDays.bind(this);
 	}
 
