@@ -12,46 +12,40 @@ export default class CalendarComponent extends Component {
 
 		this.renderWeeks = this.renderWeeks.bind(this);
 		this.getCurrentMonth = this.getCurrentMonth.bind(this);
-		this.modalOpen = this.modalOpen.bind(this);
-		this.modalClose = this.modalClose.bind(this);
-		this.modalCloseOutside = this.modalCloseOutside.bind(this);
-		this.createAndClose = this.createAndClose.bind(this);
 		this.setChosenDay = this.setChosenDay.bind(this);
+		this.addEvent = this.addEvent.bind(this);
 	}
 
-	modalOpen(event) {
-		this.refs.modal.style.display = "block";
-		this.refs.time.value = '';
-		this.refs.type.value = '';
-		this.refs.narrator.value = '';
-		this.refs.name.value = '';
-		this.refs.time.focus();
-	};
-
-	modalClose() {
-		this.refs.modal.style.display = "none";
-	};
-
-	modalCloseOutside(event) {
-		// event.stopPropagation();
-		if (event.target === this.refs.modal) {
-			this.refs.modal.style.display = "none";
-		}
-	};
-
-	createAndClose(event) {
-		this.addEvent();
-		this.modalClose();
-	};
+	// modalOpen(event) {
+	// 	this.refs.modal.style.display = "block";
+	// 	this.refs.time.value = '';
+	// 	this.refs.type.value = '';
+	// 	this.refs.narrator.value = '';
+	// 	this.refs.name.value = '';
+	// 	this.refs.time.focus();
+	// };
+	//
+	// modalClose() {
+	// 	this.refs.modal.style.display = "none";
+	// };
+	//
+	// modalCloseOutside(event) {
+	// 	if (event.target === this.refs.modal) {
+	// 		this.refs.modal.style.display = "none";
+	// 	}
+	// };
+	//
+	// createAndClose(event) {
+	// 	this.addEvent();
+	// 	this.modalClose();
+	// };
 
 	setChosenDay(day) {
 		this.setState({chosenDay: day})
 	};
 
-	addEvent() {
+	addEvent(newEvent) {
 		const self = this;
-		console.log(this.state.chosenDay)
-
 		let body = {
 			date: {
 				day: this.state.chosenDay,
@@ -59,12 +53,7 @@ export default class CalendarComponent extends Component {
 				year: this.state.currentMonth.date.year,
 
 			},
-			event: {
-				name: this.refs.name.value,
-				narrator: this.refs.narrator.value,
-				time: this.refs.time.value,
-				eventType: this.refs.type.value
-			}
+			event: newEvent
 		};
 		body = JSON.stringify(body);
 
@@ -136,9 +125,13 @@ export default class CalendarComponent extends Component {
 				}
 			});
 
-			// console.log(weeks);
 			return weeks.map(function (week, i) {
-				return <WeekComponent week={week} key={i} modalOpen={self.modalOpen} setChosenDay={self.setChosenDay}/>
+				return <WeekComponent week={week}
+															key={i}
+															modalOpen={self.modalOpen}
+															setChosenDay={self.setChosenDay}
+															addEvent={self.addEvent}
+				/>
 			});
 		}
 	}
@@ -154,24 +147,6 @@ export default class CalendarComponent extends Component {
 						<WeekdayNamesComponent/>
 						{this.renderWeeks()}
 					</Calendar>
-
-					{/* <!-- The Modal --> */}
-					<div ref="modal" onClick={this.modalCloseOutside} className="modal">
-						{/* <!-- Modal content --> */}
-						<div className="modal-content form">
-							<div className="modal-header">
-								<h4>Add new event</h4>
-							</div>
-							<div className="modal-body">
-								<input className="modal-input" ref="time" type="text" placeholder="event time" autoFocus/>
-								<input className="modal-input" ref="type" type="text" placeholder="event type" />
-								<input className="modal-input" ref="narrator" type="text" placeholder="event narrator" />
-								<input className="modal-input" ref="name" type="text" placeholder="event name" />
-								<button className="button modal-button" onClick={this.createAndClose}>Add</button>
-							</div>
-						</div>
-					</div>
-
 				</CalendarWrapper>
 		);
 	}

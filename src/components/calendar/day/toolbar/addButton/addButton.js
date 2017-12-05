@@ -6,10 +6,10 @@ export default class AddButtonComponent extends Component {
 
 	constructor(props) {
 		super(props);
-		this.addEvent = this.addEvent.bind(this);
+		this.openModal = this.openModal.bind(this);
 	}
 
-	addEvent() {
+	openModal() {
 		this.props.setChosenDay(this.props.dayOfMonth);
 		this.props.modalOpen();
 
@@ -17,7 +17,7 @@ export default class AddButtonComponent extends Component {
 
 	render() {
 		return (
-			<AddButton onClick={this.addEvent}>+</AddButton>
+			<AddButton onClick={this.openModal}>+</AddButton>
 		);
 	}
 }

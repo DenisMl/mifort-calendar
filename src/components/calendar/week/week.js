@@ -12,7 +12,12 @@ export default class WeekComponent extends Component {
 	}
 
 	renderDays(day, i) {
-		return (<DayComponent day={day} key={i} modalOpen={this.props.modalOpen} setChosenDay={this.props.setChosenDay}/>)
+		return (<DayComponent day={day}
+													key={i}
+													modalOpen={this.props.modalOpen}
+													setChosenDay={this.props.setChosenDay}
+													addEvent={this.props.addEvent}
+		/>)
 	}
 
 	render() {
