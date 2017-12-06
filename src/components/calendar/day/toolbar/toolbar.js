@@ -9,6 +9,7 @@ export default class ToolbarComponent extends Component {
 			<Toolbar>
 				<AddButtonComponent dayOfMonth={this.props.dayOfMonth}
 														modalOpen={this.props.modalOpen}
+														modalClose={this.modalClose}
 														setChosenDay={this.props.setChosenDay}/>
 			</Toolbar>
 		);
